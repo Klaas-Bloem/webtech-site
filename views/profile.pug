@@ -1,0 +1,75 @@
+//- This file displays the profile page.
+//- - It shows the users their information and allows the user to change it
+//- - If not logged in a message will be displayed that they should
+
+
+extends layout 
+
+block nav__header 
+ h1 Profile
+
+block main__content
+  //- invisible p to store the error when the old password does not match with the db
+  if error
+    p#server-error(hidden)= error
+    script.
+      const msg = document.getElementById('server-error')?.textContent;
+      if (msg) alert(msg);
+
+  if (user)
+    div(class="main__user-info")
+      p Firstname: #{user.firstname}
+      p Lastname: #{user.lastname}
+      p Email: #{user.email}
+      p Favorite team: #{user.team}
+      p 
+        a(href=`${ROOT_DIR}/logout` id = "main__logout-link") Logout
+
+    button.main__edit-button(type="button") Edit
+
+    form.main__edit-form(name="data", action=`${ROOT_DIR}/processEditProfileForm`, method="POST")
+      p
+        label
+          | Firstname:
+          input(type="text", name="firstname", value = user.firstname, required)
+      p
+        label
+          | Lastname:
+          input(type="text", name="lastname", value= user.lastname, required)
+      p
+        label
+          | Email:  
+          input(type="email", name="email", value= user.email, required)
+      p
+        label
+          | Favorite team:
+          select(name="team", required)
+            option(value="") Please choose an option
+            option(value="ChinGalan") Chingalan
+            option(value="TapiaCoello") TapiaCoello
+            option(value="LebronAugsburger") LebronAugsburger
+            option(value="StupaYanguas") StupaYanguas
+            option(value="NavarroGuerrero") NavarroGuerrero
+            option(value="NietoSanz") NietoSanz
+            option(value="NennoGonzalez") NennoGonzalez
+      p
+        label
+          | Old Password 
+          input#oldPassword(type="password", name="oldPassword", placeholder="Enter your old password", required)
+      p
+        label
+          | Password:
+          input#editPassword(type="password", name="editPassword", placeholder="Password", required)
+      p
+        label
+          | Repeat password:
+          input#editPassword2(type="password", name="editPassword2", placeholder="Password", required)
+      p
+        label
+          input(type="submit", value="Confirm")
+
+
+  else 
+    p Sign in first
+
+  script(src=`${ROOT_DIR}/scripts/edit.js`)

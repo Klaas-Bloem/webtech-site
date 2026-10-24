@@ -1,0 +1,35 @@
+//- This file displays the games for a specific team page.
+//- - It generates the table wih latest and upcoming games for the selected team
+
+
+extends layout
+
+block nav__header
+  h1= team.title  
+
+block main__content
+  nav.nav__menu
+    a(href=`${ROOT_DIR}/team/${team.title}/players`) Players
+    a(href=`${ROOT_DIR}/team/${team.title}/games`) Games
+    a(href=`${ROOT_DIR}/team/${team.title}/info`) Info
+
+  div(class="main__table--scroll")
+    table 
+      caption 
+        strong Played and upcoming games
+      tr
+        th Date
+        th Tournament
+        th Team 1
+        th Score
+        th Team 2
+    
+      each game in games
+        tr(id=(user && (game.team1 === user.team || game.team2 === user.team) ? 'favorite-team' : ''))
+          td= game.gameDate
+          td= game.tournamentTitle
+          td
+            a(href=`${ROOT_DIR}/team/${game.team1}`)= game.team1
+          td #{game.team1Score} - #{game.team2Score}
+          td
+            a(href=`${ROOT_DIR}/team/${game.team2}`)= game.team2

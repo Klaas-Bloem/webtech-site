@@ -1,0 +1,28 @@
+//- This file displays the teams page
+//- - It generates the table with all teams listed
+//- - the logged in users favorite team is highlighted
+//- - Team names are clickable which brings them to the specific team page
+
+
+extends layout 
+
+block nav__header 
+ h1 Teams
+
+block main__content
+  div(class="main__table--scroll")
+    table
+      caption
+        strong Teams 
+      
+      tr
+        th Team
+        th Country
+        th City
+      
+      each team, index in teams
+        tr(id=(user && team.title == user.team ? 'favorite-team' : ''))
+          td
+            a(href=`${ROOT_DIR}/team/${team.title}`)= team.title
+          td= team.country
+          td= team.city

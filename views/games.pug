@@ -1,0 +1,73 @@
+//- This file displays the upcoming games page.
+//- - It generates the table and highlights the users favorite team
+//- - It uses games.js to listen to the next button
+//- - It also allows the admin to fill in the scores which will be moved to the latest scores page
+
+
+extends layout 
+
+block nav__header 
+  h1 Games
+
+block main__content 
+  if user && user.isAdmin 
+    form(method='POST' action=`${ROOT_DIR}/admin/games`)
+      div(class="main__table--scroll")
+        table(id = "main__games-table" class = "main__dynamic-table")
+          caption
+            strong Upcoming Games
+          tr
+            th Tournament
+            th Date
+            th Team 1 
+            th Score
+            th Team 2
+        
+          each game in games 
+            tr(id=(user && (game.team1 === user.team || game.team2 === user.team) ? 'favorite-team' : ''))
+              td= game.tournamentTitle
+              td= game.gameDate
+              td
+                a(href=`${ROOT_DIR}/team/${game.team1}`)= game.team1
+              td 
+                label #{game.team1Score ? game.team1Score : ''} - #{game.team2Score ? game.team2Score : ''}
+                  //- prefix game.id with id to store as string not index
+                input(name = `score[id${game.id}][team1Score]` value = game.team1Score type="number" min="0")
+                span -
+                input(name = `score[id${game.id}][team2Score]` value = game.team2Score type="number" min="0")
+              td
+                a(href=`${ROOT_DIR}/team/${game.team2}`)= game.team2
+        button(type='submit') Submit 
+  else             
+    div(class="main__table--scroll")
+      table(id = "main__games-table" class = "main__dynamic-table")
+        caption
+          strong Upcoming Games
+        tr
+          th Tournament
+          th Date
+          th Team 1 
+          th Score
+          th Team 2
+      
+        each game in games 
+          tr(id=(user && (game.team1 === user.team || game.team2 === user.team) ? 'favorite-team' : ''))
+            td= game.tournamentTitle
+            td= game.gameDate
+            td
+              a(href=`${ROOT_DIR}/team/${game.team1}`)= game.team1
+            td -
+            td
+              a(href=`${ROOT_DIR}/team/${game.team2}`)= game.team2
+    
+  
+  button(id = "main__games-button") Next Games
+
+  //- give users favorite team to games.js so it can highlight the newly generated rows
+  script.
+    const userTeam = !{JSON.stringify(user ? user.team : null)};
+    const isAdmin = !{JSON.stringify(user && user.isAdmin)};
+
+  script(src=`${ROOT_DIR}/scripts/games.js`)
+
+

@@ -1,0 +1,53 @@
+//- This file displays the league page.
+//- - It generates an article with information about the league
+//- - It generates a table with the different kinds of tournament categories
+
+
+extends layout 
+
+block nav__header 
+  h1 League Info
+
+block main__content
+  
+  article.main-story__section
+    h2 FIP(International Padel Federation) and Premier Padel
+    p The FIP is the world governing body that mangages official rankings and the tournament categories of padel.
+    p When playing padel internationally there are a couple of padel tours that you can play for official ranking points: the <strong>Premier Padel Tour</strong> (Majors, P1, P2) as the top circuit, plus the <strong>CUPRA FIP TOUR</strong> (Platinum, Gold, Silver, Bronze) as a "step up tour" for rising padel stars.
+    p A full season has around 20-24 tournaments worldwide. For each tournament a player/team can earn a certain amount of points to climb the FIP rankings. A table below shows the earned points for winners per category.
+
+  table
+    caption
+      strong Tournament categories and points
+    tr
+      th Category
+      th Circuit
+      th Winner points
+    tr 
+      td Major
+      td Premier Padel
+      td 2000 points 
+    tr 
+      td P1
+      td Premier Padel
+      td 1000 points     
+    tr 
+      td P2
+      td Premier Padel
+      td 600 points 
+    tr 
+      td FIP Platinum
+      td CUPRA FIP Tour
+      td 300 points 
+    tr 
+      td FIP Gold
+      td CUPRA FIP Tour
+      td 150 points 
+    tr 
+      td FIP Silver
+      td CUPRA FIP Tour
+      td 80 points 
+    tr 
+      td FIP Bronze
+      td CUPRA FIP Tour
+      td 40 points 

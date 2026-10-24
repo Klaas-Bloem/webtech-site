@@ -1,0 +1,13 @@
+//- This page displays a player card
+//- - it uses players.js to display the player card once clicked on their name
+
+
+extends layout
+
+block nav__header
+  h1= playerData.firstName + " " + playerData.lastName
+
+block main__content 
+  div(id="player-data" data-json=playerJSON)
+  script(src=`${ROOT_DIR}/scripts/players.js`)
+  

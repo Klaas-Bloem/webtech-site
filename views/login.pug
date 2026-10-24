@@ -1,0 +1,22 @@
+//- This file displays the login page.
+//- - It lets users fill in their credentials
+
+
+extends layout 
+
+block nav__header 
+ h1 Login
+
+block main__content 
+  form#login-form(name="data", action=`${ROOT_DIR}/loginForm`, method="POST")
+    p
+      label
+        | Email:
+        input(type="email", name="email", placeholder="Email")
+    p
+      label
+        | Password:
+        input(type="password", name="password", placeholder="Password")
+    p
+      label
+        input(type="submit", value="Submit")

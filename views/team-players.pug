@@ -1,0 +1,73 @@
+//- This file displays the players for a specific team page.
+//- - It generates the player cards of all players of the team
+//- - It is the default page once a user clicks on a team name
+//- - An admin can add a player to the team or delete a player from the team
+
+
+extends layout
+
+block nav__header
+  h1= team.title  
+
+block main__content
+  nav.nav__menu
+    a(href=`${ROOT_DIR}/team/${team.title}/players`) Players
+    a(href=`${ROOT_DIR}/team/${team.title}/games`) Games
+    a(href=`${ROOT_DIR}/team/${team.title}/info`) Info
+
+  div(id="player-data" data-json=playersJSON)
+
+  if user && user.isAdmin 
+    form(method='POST' action=`${ROOT_DIR}/admin/team/${team.title}/players`)
+      p
+        label Delete Player:
+        select(name="player", required)
+          option(value="") Please choose an option
+          each player in players
+            option(value= `${player.firstName} ${player.lastName}`) #{player.firstName} #{player.lastName}
+      button(type='submit') Submit 
+    
+    button.main__add-players-button(type="button") Add player to team
+
+    //- enctype for photo save
+    form.main__add-players-form(name="data", action=`${ROOT_DIR}/admin/addPlayersToTeamForm`, method="POST" enctype="multipart/form-data")
+      p
+        label
+          | Firstname:
+          input(type="text", name="firstname", placeholder= "firstname" required)
+      p
+        label
+          | Lastname:
+          input(type="text", name="lastname", placeholder= "lastname", required)
+      p
+        label
+          | Birthdate:  
+          input(type="date", name="birthDate", required)
+      p
+        label
+          | Points: 
+          input(type="number", min="0", name="points", placeholder="points", required)
+      p
+        label
+          | Nationality:
+          input(type="text" name="nationality", placeholder="nationality", required)
+      p
+        label
+          | Position:
+          input(type="text", name="position", placeholder="position", required)
+      p
+        label
+          | Player Number:
+          input(type="number", name="number", placeholder="number", required)
+      p
+        label
+          | Photo :
+          input(type="file", name="photo", accept ="image/*", class = "form__input-photo")
+      p
+        input(type="hidden", name="team", value=team.title)          
+      p
+        input(type="submit", value="Confirm")
+
+    script(src=`${ROOT_DIR}/scripts/edit.js`)
+
+  script(src=`${ROOT_DIR}/scripts/players.js`)

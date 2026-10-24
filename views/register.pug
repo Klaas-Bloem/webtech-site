@@ -1,0 +1,43 @@
+//- This file displays the register page.
+//- - It allows the user to register by filling in their information 
+//- - edit.js performs a password check before the form will be processed
+
+
+extends layout 
+
+block nav__header 
+ h1 Register
+
+block main__content 
+  form#registerForm(name="data", action=`${ROOT_DIR}/processRegisterForm`, method="POST")
+    p
+      label
+        | First name:
+        input(type="text", name="firstname", placeholder="Peter", required)
+    p
+      label
+        | Last name:
+        input(type="text", name="lastname", placeholder="Parker", required) 
+    p
+      label
+        | Email:
+        input(type="email", name="email", placeholder="example@gmail.com", required)
+    p
+      label
+        | Favorite team:
+        select(name="team", required)
+          option(value="") Please choose an option
+            each team in teams
+              option(value= team.title) #{team.title}
+    p
+      label
+        | Password:
+        input#password(type="password", name="password", placeholder="Password", required)
+    p
+      label
+        | Password again :
+        input#password2(type="password", name="password2", placeholder="Password", required)
+    p
+      label
+        input(type="submit", value="Submit")
+  script(src=`${ROOT_DIR}/scripts/edit.js`)

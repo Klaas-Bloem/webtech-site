@@ -1,0 +1,355 @@
+/* stylesheet containing the styles for all pages */
+
+body > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  /* background-color: #99be80f1; */
+  background-color: #1478c8;
+}
+
+body > header h1 {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+body > header > a {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  margin-inline: 1rem;
+}
+
+body > header img {
+  width: 3rem;
+  height: 3rem;
+  object-fit: contain; /* makes sure the image isn't stretched*/
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  font-family: "Serif";
+  margin-bottom: 7vh; /* added */
+}
+
+body h1 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 0 5%;
+}
+
+body p {
+  padding: 0 5%;
+}
+
+main {
+  flex: 1 0 auto;
+  margin-bottom: 1rem;
+  /*margin-top: 2rem;*/
+  text-align: center;
+}
+
+.nav__menu {
+  list-style-type: none;
+  margin-bottom: 1rem;
+  width: 100%;
+  background-color: #f1f1f1;
+  position: relative;
+  overflow: auto;
+  flex-direction: column;
+}
+
+.nav__menu a:nth-child(even) {
+  background-color: lightgray;
+}
+
+.nav__menu a {
+  display: block;
+  color: #000;
+  padding: 15px;
+  text-decoration: none;
+}
+
+.nav__menu a.active {
+  /* background-color: #4caf50; */
+  background-color: #1478c8;
+  color: white;
+}
+
+.nav__menu a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+
+table {
+  border: 1px solid black;
+  border-collapse: collapse;
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+th,
+td {
+  padding: 1rem 0.8rem;
+  border: none;
+}
+
+table tr:nth-child(even) {
+  background-color: white;
+}
+
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+
+th {
+  /* background-color: #99be80f1; */
+  background-color: #1478c8;
+}
+
+th:hover {
+  /* background-color: darkgreen; */
+  background-color: #0f5ea1;
+}
+
+td:hover {
+  background-color: lightgrey;
+}
+
+table caption {
+  margin-bottom: 1rem;
+  font-size: large;
+}
+
+.players {
+  padding: 0 5%;
+  margin-bottom: 3rem;
+  display: flex;
+  row-gap: 2rem;
+  justify-content: space-between;
+  flex-direction: column; /* small screens vertical, large screens horizontal */
+  align-items: center;
+}
+
+.players__card {
+  flex: 1 1 calc(50% - 2rem); /* flex-grow: 1, flex-shrink: 1, flex-basis: half width - half gap */
+  max-width: 720px;
+  background-color: #f1f1f1;
+  border-radius: 1rem;
+  /* overflow: hidden;  */
+}
+
+.card__img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 3; /* using aspect ratio to make all the player images the same height and width if needed */
+  object-fit: cover;
+  border-radius: 0.75rem;
+  padding-bottom: 0;
+}
+
+.card__title {
+  padding: 0 5%;
+  margin-top: 0.75rem;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.card-section__title {
+  text-align: left;
+  padding: 0 5%;
+}
+
+.card__par {
+  margin-top: 0.5rem;
+}
+
+form {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 4px;
+}
+
+form p {
+  margin-bottom: 12px;
+  font-size: 1.5rem;
+}
+
+form button[type="submit"] {
+  margin-bottom: 2rem;
+}
+
+label {
+  display: block;
+  font-size: 1rem;
+}
+
+label input,
+label select {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 4px;
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+input[type="submit"] {
+  display: block;
+  margin: 0 auto;
+  width: auto;
+  padding: 6px 14px;
+  cursor: pointer;
+  /* background: #17be3e; */
+  background-color: #bcc9d4;
+  border: none;
+  border-radius: 3px;
+}
+
+input[type="submit"]:hover {
+  background-color: #447cae;
+}
+
+footer {
+  display: flex;
+  padding: 0.3rem;
+  /* background-color: #99be80f1; */
+  background-color: #1478c8;
+  color: black;
+  position: fixed;
+  bottom: 0;
+  height: 1vh;
+  width: 100%;
+  justify-content: center;
+  gap: 5vw;
+  align-items: center;
+}
+
+#favorite-team {
+  background: rgba(196, 188, 115, 0.5);
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(196, 188, 115, 0.5);
+}
+
+.main__edit-form,
+.main__add-players-form {
+  display: none;
+}
+
+.main__add-players-button {
+  margin: 1rem 0;
+}
+
+.main-story__section,
+.main__user-info {
+  max-width: 70%;
+  margin: 2rem auto 3rem;
+  padding: 2rem;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.main__user-info p a {
+  padding-top: 1.5rem;
+}
+
+/* link fills entire cell */
+table td a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  overflow-wrap: break-word; /*Make words in links break to get words within table form */
+}
+
+#main__logout-link {
+  display: block;
+  margin: 1rem 0;
+}
+
+.main__table--scroll {
+  width: 100%;
+  overflow-x: auto;
+  padding-inline: 1rem;
+  box-sizing: border-box;
+}
+
+.main__table--scroll input[type="number"] {
+  width: 2rem;
+}
+
+.main__table--scroll label {
+  font-size: 1rem;
+}
+
+#registerForm,
+#login-form,
+.main__edit-form,
+.main__add-players-form {
+  max-width: 400px;
+}
+
+@media only screen and (min-width: 768px) {
+  body > header img {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  body > header > a {
+    margin-inline: 3rem;
+  }
+
+  .nav__menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-bottom: 1rem;
+  }
+
+  .nav__menu a {
+    float: left;
+    flex-grow: 1;
+    text-align: center;
+  }
+
+  .players {
+    flex-direction: row; /* on larger screens horizontal instead of vertical */
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .players__card {
+    flex: 0 1 calc(50% - 2rem); /* flex-grow: 0, flex-shrink: 1, flex-basis: half width - gap */
+  }
+
+  form {
+    width: 70%;
+    max-width: none;
+  }
+
+  .main__games-form,
+  .main__scores-form {
+    width: 90%;
+    max-width: 1200px;
+  }
+
+  .main__games-table,
+  .main__scores-table {
+    /*makes it so the table stays the same even after adding 10 next*/
+    table-layout: fixed;
+  }
+}

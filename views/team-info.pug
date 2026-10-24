@@ -1,0 +1,26 @@
+//- This file displays the info for a specific team page.
+//- - It displays the teams information 
+
+
+extends layout
+
+block nav__header
+  h1= team.title  
+
+block main__content
+  nav.nav__menu
+    a(href=`${ROOT_DIR}/team/${team.title}/players`) Players
+    a(href=`${ROOT_DIR}/team/${team.title}/games`) Games
+    a(href=`${ROOT_DIR}/team/${team.title}/info`) Info
+
+  div(class="main__table--scroll")
+    h2 Team Information
+    p 
+      strong Country: 
+      span= team.country  
+    p 
+      strong City: 
+      span= team.city
+    p 
+      strong Points: 
+      span= team.points

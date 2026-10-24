@@ -1,0 +1,113 @@
+//- This file displays the players page.
+//- - It generates a table containing all players
+//- - Players are clickable which shows a page displaying the player 
+//- - Admins can add and delete players
+
+
+extends layout
+
+block nav__header
+  h1 Players 
+
+block main__content
+  if user && user.isAdmin 
+    button.main__add-players-button(type="button") Add player
+
+    form.main__add-players-form(name="data", action=`${ROOT_DIR}/admin/addPlayersForm`, method="POST" enctype="multipart/form-data")
+      p
+        label
+          | Firstname:
+          input(type="text", name="firstname", placeholder= "firstname" required)
+      p
+        label
+          | Lastname:
+          input(type="text", name="lastname", placeholder= "lastname", required)
+      p
+        label
+          | Birthdate:  
+          input(type="date", name="birthDate", required)
+      p
+        label
+          | Points: 
+          input(type="number", min="0", name="points", placeholder="points", required)
+      p
+        label
+          | Nationality: 
+          input(type="text" name="nationality", placeholder="nationality", required)
+      p
+        label
+          | Position:
+          input(type="text", name="position", placeholder="position", required)
+      p
+        label
+          | Player Number:
+          input(type="number", name="number", placeholder="number", required)
+      p
+        label
+          | Photo:
+          input(type="file", name="photo", accept ="image/*", class = "form__input-photo")
+      p
+        label
+          | Team Title:
+          select(name="team", required)
+            option(value="") Please choose an option
+              each team in teams
+                option(value= team.title) #{team.title}           
+      p
+        label
+          input(type="submit", value="Confirm")
+          
+
+    form(method='POST' action=`${ROOT_DIR}/admin/delete/player`)
+      div(class="main__table--scroll")
+        table
+          caption 
+            strong Players Table
+          tr
+            th Rank
+            th Name
+            th Birthday
+            th Nationality
+            th Number
+            th Position
+            th Points
+            th 
+          
+          each player, index in players
+            tr(id=(user && (player.teamTitle === user.team) ? 'favorite-team' : ''))
+              td= index + 1
+              td
+                a(href=`${ROOT_DIR}/players/${player.firstName}/${player.lastName}`)= player.firstName + ' ' + player.lastName
+              td= player.birthDate 
+              td= player.nationality
+              td= player.playerNumber 
+              td= player.position
+              td= player.points
+              td
+                button(name='player' value= `${player.firstName} ${player.lastName}` type='submit') Delete  
+    script(src=`${ROOT_DIR}/scripts/edit.js`)
+
+  else 
+    div(class="main__table--scroll")
+      table
+        caption 
+          strong Players Table
+        tr
+          th Rank
+          th Name
+          th Birthday
+          th Nationality
+          th Number
+          th Position
+          th Points
+
+        each player, index in players
+          tr(id=(user && (player.teamTitle === user.team) ? 'favorite-team' : ''))
+            td= index + 1
+            td
+              a(href=`${ROOT_DIR}/players/${player.firstName}/${player.lastName}`)= player.firstName + ' ' + player.lastName
+            td= player.birthDate 
+            td= player.nationality
+            td= player.playerNumber 
+            td= player.position
+            td= player.points

@@ -1,0 +1,39 @@
+//- The layout for all pug pages. All pages use this layout as their fundament
+//- - It defines the head, body header and nav bar, and the footer
+//- - It displays a welcome message to the logged in user at the top of the page 
+
+
+doctype html
+html(lang="en")
+  head
+      meta(charset="utf-8")
+      meta(name="viewport", content="width=device-width, initial-scale=1.0")
+      meta(name="description", content=metaDescription || 'On this site you can find all the information about Padel!')
+      link(rel="stylesheet", href=`${ROOT_DIR}/stylesheets/styles.css`) 
+      link(rel="icon" type="image/x-icon" href=`${ROOT_DIR}/media/padel_logo.png`)
+      
+  body
+    header
+      a(href=`${ROOT_DIR}/leaderboard`)
+        img(src=`${ROOT_DIR}/media/padel_logo.png`, alt="ChinoGalan Logo")
+      block nav__header 
+      a(href=`${ROOT_DIR}/profile`)
+        img(src=`${ROOT_DIR}/media/profile_button.png`, alt="Profile settings")
+
+    nav(class="nav__menu")
+      a(href=`${ROOT_DIR}/leaderboard`) Leaderboard 
+      a(href=`${ROOT_DIR}/scores`) Latest Scores
+      a(href=`${ROOT_DIR}/games`) Upcoming Games
+      a(href=`${ROOT_DIR}/teams`) Teams 
+      a(href=`${ROOT_DIR}/players`) Players 
+      a(href=`${ROOT_DIR}/league`) League Info     
+      if (!user)
+        a(href=`${ROOT_DIR}/login`) Login
+        a(href=`${ROOT_DIR}/register`) Register
+
+    main
+      if (user)  
+        h2 Welcome  #{user.firstname + " " +  user.lastname} to this page!
+      block main__content 
+
+  footer

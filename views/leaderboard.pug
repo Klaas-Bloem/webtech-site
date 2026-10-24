@@ -1,0 +1,34 @@
+//- This file displays the leaderboard page.
+//- It generates the table and highlights the users favorite team
+//- It uses games.js to listen to the next button
+
+
+extends layout 
+
+block nav__header 
+  h1 Leaderboard
+
+block main__content 
+  div(class="main__table--scroll")
+    table
+      caption
+        strong Team ranking
+      
+      tr
+        th Rank
+        th Team
+        th Country
+        th City
+        th Points
+        th Wins / Losses
+        //- its not possible in padel to have a draw
+      
+      each team, index in teams
+        tr(id=(user&& team.title == user.team ? 'favorite-team' : ''))
+          td= index + 1
+          td
+            a(href=`${ROOT_DIR}/team/${team.title}`)= team.title
+          td= team.country
+          td= team.city
+          td= team.points
+          td= `${team.wins} / ${team.losses}`
