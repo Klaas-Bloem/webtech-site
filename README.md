@@ -1,4 +1,4 @@
-# Assigment 3
+# Assignment 3
 
 # Group 15
 Wouter Baghuis (0808970), Klaas Bloem (9994254)
@@ -27,17 +27,32 @@ The main file is 'app.js' in which all middleware is mounted as follows:
 - Error handling
 
 When switching between localhost and the server change the ROOT_DIR var to
-(local: ROOT_DIR = "", and on the server: ROOT_DIR = "/group15")
+(local: `ROOT_DIR = ""`, and on the server: `ROOT_DIR = "/group15"`) in:
 - .env
 - public/scripts/players.js (top of file)
 - public/scripts/games.js (top of file)
 
+# Getting started
+Requires Node.js 20.17 or newer.
+
+```bash
+npm install            # install all packages
+cp .env.example .env   # create your own .env, then fill in the empty values
+npm start              # start the server with nodemon
+```
+
+The site runs on http://localhost:8015 (or the PORT set in .env).
+
 # Website Structure
+```
 root
 |-- app.js
 |-- db.js
 |-- schema.sql
-|-- .env
+|-- .env (not in git)
+|-- .env.example
+|-- .gitattributes
+|-- .gitignore
 |-- package-lock.json
 |-- package.json
 |-- README.md (this file)
@@ -58,7 +73,7 @@ root
 |   |-- leaderboard.pug
 |   |-- league.pug
 |   |-- login.pug
-|   |-- player_card.pug
+|   |-- player-card.pug
 |   |-- players.pug
 |   |-- profile.pug
 |   |-- register.pug
@@ -71,7 +86,8 @@ root
     |-- admins.js
     |-- pages.js
     `-- users.js
-    
+```
+
 # Database
 We used SQLite as our RDBMS.
 We used the following tables:
@@ -96,6 +112,7 @@ stored in .env (see .env.example for the required variables).
 
 # SQL definition
 
+```sql
 CREATE TABLE IF NOT EXISTS users (
 id INTEGER PRIMARY KEY AUTOINCREMENT,
 firstname TEXT,
@@ -139,3 +156,4 @@ FOREIGN KEY (team1) REFERENCES teams(title),
 FOREIGN KEY (team2) REFERENCES teams(title),
 UNIQUE (tournamentTitle, gameDate, team1, team2) -- to make sure no double games
 );
+```
